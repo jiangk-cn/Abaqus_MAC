@@ -10,10 +10,15 @@ inter = np.linspace(0, 1, 100)
 y_current = current(inter).T
 y_benchmark = benchmark(inter).T
 
-# 输入：当前模态形状和基准模态形状
-# MAC_MATRIX - 计算给定基准的MAC矩阵
 def mac(Phi1, Phi2):
-    # 该函数计算phi1和phi2之间的MAC
+    """
+    > The function takes two matrices as input and returns the matrix of cosine similarities between the
+    columns of the two matrices
+    
+    :param Phi1: The first feature vector
+    :param Phi2: The feature matrix of the test data
+    :return: the value of the MAC.
+    """
     mAc = (abs(np.dot(Phi1.T, Phi2))) ** 2 / ((np.dot(Phi1.T, Phi1)) * (np.dot(Phi2.T, Phi2)))
     return mAc
 
