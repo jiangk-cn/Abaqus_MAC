@@ -8,5 +8,5 @@
     4. read the result file. 
     5. extract modal frequency and mode shape. 
     6. judge which mode shape belongs. 
-    7. calculate the distance between calculated mode shapes and presrribed mode shapes. 
+    7. calculate the distance between calculated mode shapes and prescribed mode shapes. 
     8. write the result to a txt file.
