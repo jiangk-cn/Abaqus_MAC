@@ -8,14 +8,14 @@ import os
 import glob
 
 # Specify the path of the Abaqus input file
-abaqus_inp_path='R:\Abaqus_MAC\Abaqus_teeter_inp\teeter.inp'
+abaqus_inp_path='R:\\Abaqus_MAC\\Abaqus_teeter_inp\\teeter.inp'
 
 # Read section properties from file
 flap_stiffness = []
 lead_stiffness = []
 mass = []
 
-with open('R:\Abaqus_MAC\Abaqus_teeter_inp\section_property.txt') as f:
+with open('R:\\Abaqus_MAC\\Abaqus_teeter_inp\\section_property.txt') as f:
     for i, line in enumerate(f):
         if i >= 40:
             break 
@@ -286,24 +286,32 @@ distance_normailze_list_flap_couple, distance_list_flap_couple = distance_inters
 distance_normailze_list_flap_periodic, distance_list_flap_periodic= distance_intersection(flap_periodic_mode_avoid, flap_periodic_mode_all_conditions)
 
 # Reshaping the list into a 7x5 matrix.
-array = np.array(distance_list_flap_couple).reshape(5, 7)
-transposed_array = array.T
-distance_list_flap_couple_reshape = transposed_array.tolist()
+distance_list_flap_couple_reshape = np.array(distance_normailze_list_flap_couple).reshape(5, 7).T.tolist()
+distance_list_flap_periodic_reshape = np.array(distance_normailze_list_flap_periodic).reshape(5, 7).T.tolist()
+distance_normalize_list_flap_couple_reshape = np.array(distance_list_flap_couple).reshape(5, 7).T.tolist()
+distance_normalize_list_flap_periodic_reshape = np.array(distance_list_flap_periodic).reshape(5, 7).T.tolist()
 
-array = np.array(distance_list_flap_periodic).reshape(5, 7)
-transposed_array = array.T
-distance_list_flap_periodic_reshape = transposed_array.tolist()
-
-# The above code is writing the two lists into a text file.
+# Write distance_list to a text file.
 with open('distance_list_reshape.txt', 'w') as f:
     f.write('total_mass:\n')
     f.write(str(totalmass)+'\n')
     f.write('distance_list_flap_couple_reshape:\n')
     for row in distance_list_flap_couple_reshape:
-        f.write('\t'.join('{:.3f}'.format(e) for e in row) + '\n')
+        f.write('\t'.join('{:10.3f}'.format(e) for e in row) + '\n')
 
     f.write('\ndistance_list_flap_periodic_reshape:\n')
     for row in distance_list_flap_periodic_reshape:
+        f.write('\t'.join('{:10.3f}'.format(e) for e in row) + '\n')
+
+with open('distance_normalize_list.txt', 'w') as f:
+    f.write('total_mass:\n')
+    f.write(str(totalmass)+'\n')
+    f.write('distance_normalize_list_flap_couple:\n')
+    for row in distance_normalize_list_flap_couple_reshape:
+        f.write('\t'.join('{:.3f}'.format(e) for e in row) + '\n')
+
+    f.write('\ndistance_normalize_list_flap_periodic:\n')
+    for row in distance_normalize_list_flap_periodic_reshape:
         f.write('\t'.join('{:.3f}'.format(e) for e in row) + '\n')
         
 # End of the code.
