@@ -10,3 +10,5 @@
     6. judge which mode shape belongs. 
     7. calculate the distance between calculated mode shapes and prescribed mode shapes. 
     8. write the result to a txt file.
+# beam.cae
+    1. Abaqus cae file, including the model and the analysis.
